@@ -5,7 +5,7 @@ import {
   PieChart, Pie, Cell, ResponsiveContainer
 } from "recharts";
 
-const COLORS = ["#4CAF50", "#F44336"]; // Green = Completed, Red = Missed
+const COLORS = ["#4CAF50", "#F44336"]; 
 const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export default function Analytics({ habitId }) {
@@ -24,15 +24,14 @@ export default function Analytics({ habitId }) {
 
   if (!data) return <p style={{ textAlign: "center", marginTop: "50px" }}>Loading analytics...</p>;
 
-  // Ensure safe values
-  const completed = data.completed_checkins ?? 0;
-  const missed = data.missed_checkins ?? 0;
+ const completed = data.completed_checkins ?? 0;
+const missed = data.missed_checkins ?? 0;
 
-  // Pie chart: completed vs missed
-  const pieData = [
-    { name: "Completed", value: completed },
-    { name: "Missed", value: missed },
-  ];
+const pieData = [
+  { name: "Completed", value: completed },
+  { name: "Missed", value: missed },
+];
+
 
   // Bar chart data for weekly distribution
   const barData = daysOfWeek.map((day, idx) => ({
@@ -100,7 +99,7 @@ export default function Analytics({ habitId }) {
 
         {/* Bar Chart */}
         <div style={chartCard}>
-          <h3 style={chartTitle}>Weekly Check-ins</h3>
+          <h3 style={chartTitle}>CheckIns</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={barData}>
               <CartesianGrid strokeDasharray="3 3" />
