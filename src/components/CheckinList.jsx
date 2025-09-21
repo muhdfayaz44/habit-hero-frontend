@@ -44,7 +44,7 @@ export default function CheckInList() {
         <table style={tableStyle}>
           <thead>
             <tr>
-              <th style={thTdStyle}>ID</th>
+              {/* <th style={thTdStyle}>ID</th> */}
               <th style={thTdStyle}>Habit</th>
               <th style={thTdStyle}>Date</th>
               <th style={thTdStyle}>Status</th>
@@ -53,7 +53,7 @@ export default function CheckInList() {
           <tbody>
             {checkIns.map((c) => (
               <tr key={c.id}>
-                <td style={thTdStyle}>{c.id}</td>
+                {/* <td style={thTdStyle}>{c.id}</td> */}
                 <td style={thTdStyle}>{c.habit_name}</td>
                 <td style={thTdStyle}>{c.date}</td>
                 <td style={{ ...thTdStyle, ...statusStyle(c.status) }}>

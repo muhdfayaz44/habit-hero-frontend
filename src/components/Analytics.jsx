@@ -26,8 +26,7 @@ export default function Analytics({ habitId }) {
 
   // Ensure safe values
   const completed = data.completed_checkins ?? 0;
-  const expected = data.total_expected ?? 0;
-  const missed = Math.max(expected - completed, 0);
+  const missed = data.missed_checkins ?? 0;
 
   // Pie chart: completed vs missed
   const pieData = [
