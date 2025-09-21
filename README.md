@@ -6,9 +6,10 @@ A React-based habit tracker (UI, charts, forms).
 1. Clone repo:
    git clone https://github.com/muhdfayaz44/habit-hero-frontend.git
 2. Install:
+
    cd habit-hero-frontend
    npm install
-3. Run:
+4. Run:
    npm start
 
 ## Features
