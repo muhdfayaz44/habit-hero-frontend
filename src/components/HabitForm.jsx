@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function HabitForm() {
+export default function HabitForm() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [frequency, setFrequency] = useState("");
@@ -11,17 +11,12 @@ function HabitForm() {
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/categories/")
-      .then((res) => {
-        console.log('Categories fetched:', res.data);
-        setCategories(res.data);
-      })
+      .then((res) => setCategories(res.data))
       .catch((err) => console.error("Error fetching categories:", err));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitting habit:', { name, description, category });
-
     axios.post("http://127.0.0.1:8000/api/habits/", {
       name,
       description,
@@ -30,84 +25,107 @@ function HabitForm() {
       start_date: startDate,
     })
       .then((res) => {
-        console.log('Habit created:', res.data);
         setName("");
         setDescription("");
         setCategory("");
+        setFrequency("");
+        setStartDate("");
         alert("Habit created!");
       })
       .catch((err) => {
-  if (err.response) {
-    console.error("Error creating habit:", err.response.data);
-    alert("Failed to create habit: " + JSON.stringify(err.response.data));
-  } else {
-    console.error("Error creating habit:", err.message);
-    alert("Failed to create habit: " + err.message);
-  }
-});
+        if (err.response) alert("Failed: " + JSON.stringify(err.response.data));
+        else alert("Failed: " + err.message);
+      });
   };
 
+  // Inline styles
+  const formCard = {
+    background: "#f8f9fa",
+    padding: "20px",
+    borderRadius: "12px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    marginBottom: "30px"
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    marginBottom: "15px",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    boxSizing: "border-box"
+  };
+
+  const buttonStyle = {
+    padding: "10px 20px",
+    borderRadius: "6px",
+    border: "none",
+    backgroundColor: "#3498db",
+    color: "#fff",
+    fontWeight: "bold",
+    cursor: "pointer"
+  };
+
+  const labelStyle = { marginBottom: "5px", display: "block", fontWeight: "bold" };
+
   return (
-    <form onSubmit={handleSubmit}>
-  <h2>Add Habit</h2>
+    <form onSubmit={handleSubmit} style={formCard}>
+      <h2 style={{ marginBottom: "20px" }}>➕ Add Habit</h2>
 
-  <div style={{ marginBottom: '1rem' }}>
-    <input
-      type="text"
-      placeholder="Habit Name"
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-      required
-    />
-  </div>
+      <label style={labelStyle}>Habit Name</label>
+      <input
+        type="text"
+        placeholder="Habit Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        style={inputStyle}
+        required
+      />
 
-  <div style={{ marginBottom: '1rem' }}>
-    <textarea
-      placeholder="Description"
-      value={description}
-      onChange={(e) => setDescription(e.target.value)}
-    />
-  </div>
+      <label style={labelStyle}>Description</label>
+      <textarea
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        style={inputStyle}
+      />
 
-  <div style={{ marginBottom: '1rem' }}>
-    <select
-      value={category}
-      onChange={(e) => setCategory(e.target.value)}
-      required
-    >
-      <option value="">-- Select Category --</option>
-      {categories.map((cat) => (
-        <option key={cat.id} value={cat.id}>
-          {cat.name}
-        </option>
-      ))}
-    </select>
-  </div>
+      <label style={labelStyle}>Category</label>
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        style={inputStyle}
+        required
+      >
+        <option value="">-- Select Category --</option>
+        {categories.map((cat) => (
+          <option key={cat.id} value={cat.id}>{cat.name}</option>
+        ))}
+      </select>
 
-  <div style={{ marginBottom: '1rem' }}>
-    <input
-      type="text"
-      placeholder="Frequency"
-      value={frequency}
-      onChange={(e) => setFrequency(e.target.value)}
-      required
-    />
-  </div>
+      <label style={labelStyle}>Frequency</label>
+      <select
+        value={frequency}
+        onChange={(e) => setFrequency(e.target.value)}
+        style={inputStyle}
+        required
+      >
+        <option value="">-- Select Frequency --</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+      </select>
 
-  <div style={{ marginBottom: '1rem' }}>
-    <input
-      type="date"
-      placeholder="Start Date"
-      value={startDate}
-      onChange={(e) => setStartDate(e.target.value)}
-      required
-    />
-  </div>
+      <label style={labelStyle}>Start Date</label>
+      <input
+        type="date"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+        style={inputStyle}
+        required
+      />
 
-  <button type="submit">Add Habit</button>
-</form>
-
+      <button type="submit" style={buttonStyle}>Add Habit</button>
+    </form>
   );
 }
-
-export default HabitForm;
