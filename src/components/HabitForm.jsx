@@ -9,7 +9,6 @@ function HabitForm() {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
 
-  // Fetch categories when component loads
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/categories/")
       .then((res) => {
