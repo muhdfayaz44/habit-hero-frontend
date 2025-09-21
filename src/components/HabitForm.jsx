@@ -9,7 +9,7 @@ export default function HabitForm() {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
 
-  // Fetch categories on mount
+  // Fetch categories
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/categories/")
       .then(res => setCategories(res.data))

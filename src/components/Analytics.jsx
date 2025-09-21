@@ -33,7 +33,7 @@ const pieData = [
 ];
 
 
-  // Bar chart data for weekly distribution
+  // Bar chart data 
   const barData = daysOfWeek.map((day, idx) => ({
     day,
     checkins: data.weekly_distribution ? data.weekly_distribution[idx] : 0

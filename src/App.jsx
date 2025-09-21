@@ -1,12 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import CategoryList from "./components/CategoryList";
 import HabitForm from "./components/HabitForm";
 import HabitList from "./components/HabitList";
 import CheckInForm from "./components/CheckInForm";
 import CheckinList from "./components/CheckinList";
 import Analytics from "./components/Analytics";
+import MotivationQuote from "./components/MotivationQuote";
+
 
 export default function App() {
   const containerStyle = {
@@ -33,6 +34,7 @@ export default function App() {
             element={
               <>
                 <CategoryList />
+                <MotivationQuote />
                 <HabitForm />
                 <HabitList />
                 <CheckInForm />
